@@ -1,0 +1,50 @@
+import tkinter as tk
+
+root = tk.Tk()
+root.title("Dropdown Lists")
+
+# Location of Idler dropdown list
+Location_of_Idler_var = tk.StringVar()
+Location_of_Idler_var.set("Choose Location of Idler")
+Location_of_Idler_options = ["No Idler","Belt slack side, inside of belt", "Belt slack side, outside of belt", "Belt tight side, inside of belt", "Belt tight side, outside of belt"]
+Location_of_Idler_dropdown = tk.OptionMenu(root, Location_of_Idler_var, *Location_of_Idler_options)
+Location_of_Idler_dropdown.pack()
+
+
+# Dictionary to store values for each combination of options
+values_Ki = {  
+            ("No Idler"):0.0,
+            ("Belt slack side, inside of belt"): 0.0,
+            ("Belt slack side, outside of belt"): 0.1,
+            ("Belt tight side, inside of belt"): 0.1,
+            ("Belt tight side, outside of belt"): 0.2,
+          # Add other combinations and their values here
+         }
+
+
+
+
+def get_value_Ki():
+    # Retrieve the selected options from each dropdown list
+    Location_of_Idler = Location_of_Idler_var.get()
+
+    # Retrieve the value for the selected combination of options
+    value_Ki = values_Ki.get((Location_of_Idler), "Not Found")
+    
+    # Update the value label with the retrieved value
+    value_Ki_label.config(text=f"Ki: {value_Ki}")
+    
+
+
+
+
+# Button to retrieve the value for the selected options
+get_value_button = tk.Button(root, text="Get Value", command=get_value_Ki,)
+get_value_button.pack()
+
+# Label to display the value
+value_Ki_label = tk.Label(root, text="")
+value_Ki_label.pack()
+
+
+root.mainloop()
